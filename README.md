@@ -74,7 +74,7 @@ Before you begin, make sure you have the following tools installed:
      - assets/
      - index.html
 
-### System Folder Structure
+## System Folder Structure
 - task-management/
   - backend/
     - config/
