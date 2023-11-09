@@ -7,16 +7,6 @@ import { TaskService } from 'src/app/services/task.service';
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.css']
 })
-export class MainContentComponent implements OnInit{
-  tasks: Task[] = [];
-
-  constructor(
-    private _taskService: TaskService
-  ) { }
-
-  ngOnInit(): void {
-      this._taskService.getTasks().subscribe((data) => {
-        this.tasks = data;
-      });
-  }
+export class MainContentComponent{
+  
 }

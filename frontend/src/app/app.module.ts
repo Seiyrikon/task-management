@@ -19,13 +19,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import { TaskTableComponent } from './components/main-content/task-table/task-table.component';
+import { TaskFormComponent } from './components/main-content/task-form/task-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavigationComponent,
     MainContentComponent,
-    TaskTableComponent
+    TaskTableComponent,
+    TaskFormComponent
   ],
   imports: [
     BrowserModule,
