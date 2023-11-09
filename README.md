@@ -40,6 +40,7 @@ Before you begin, make sure you have the following tools installed:
 
 1. **Clone the repository:**
 2. **Install dependencies using npm**
+   
    backend
    - express
    - nodemon
