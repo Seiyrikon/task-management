@@ -11,3 +11,17 @@ Database
 Frontend
   - Typescript
   - Angular
+
+```
+task-management
+  backend
+    config
+    models
+    routes
+    app.js
+  frontend
+    src
+      app
+      assets
+      index.html
+```
