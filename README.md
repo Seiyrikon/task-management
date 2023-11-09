@@ -12,7 +12,7 @@ Frontend
   - Typescript
   - Angular
 
-```
+
 - task-management
   - backend
     - config
@@ -24,4 +24,4 @@ Frontend
       - app
       - assets
       - index.html
-```
+
