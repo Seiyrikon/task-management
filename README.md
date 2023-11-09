@@ -13,7 +13,8 @@ Frontend
   - Angular
 
 # Folder Structure
-```bash
+
+
 task-management
   backend
     config
@@ -25,4 +26,4 @@ task-management
       app
       assets
       index.html
-```
+
