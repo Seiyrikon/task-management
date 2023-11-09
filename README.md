@@ -75,15 +75,15 @@ Before you begin, make sure you have the following tools installed:
      - index.html
 
 ### System Folder Structure
-- task-management
-  - backend
-    - config
-    - models
-    - routes
+- task-management/
+  - backend/
+    - config/
+    - models/
+    - routes/
     - app.js
-  - frontend
-    - src
-      - app
-      - assets
+  - frontend/
+    - src/
+      - app/
+      - assets/
       - index.html
 
