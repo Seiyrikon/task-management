@@ -11,7 +11,7 @@ router.get('/all-task', async (req, res) => {
             }
         });
         if(tasks.length !== 0) {
-            res.json({message: tasks});
+            res.json(tasks);
         } else {
             res.json({message: "No data yet"});
         }

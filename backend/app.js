@@ -1,8 +1,14 @@
 const express = require('express');
+const cors = require('cors');
 const sequelize = require('./config/config');
 const taskRoutes = require('./routes/tasks');
 
 const app = express();
+
+//cors configuration
+app.use(cors());
+
+//middlewares
 app.use(express.json());
 
 sequelize.sync()
@@ -13,6 +19,7 @@ sequelize.sync()
         console.log("Error syncing database:", err);
     });
 
+//routes
 app.use('/api', taskRoutes);
 
 
