@@ -49,6 +49,7 @@ Before you begin, make sure you have the following tools installed:
 
    frontend
    - @angular/cli
+   - tailwindcss
 
 ## Backend
   - Javascript
