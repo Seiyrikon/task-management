@@ -9,28 +9,31 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./task-table.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed,void', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ])
   ]
 })
-export class TaskTableComponent implements OnInit{
-  tasks: Task[] = [];
+export class TaskTableComponent implements OnInit {
   // columnsToDisplay = ['ID', 'Name', 'Description', 'Del'];
   // columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   // expandedElement!: Task | null;
   displayedColumns: string[] = ['ID', 'Name', 'Description', 'Del'];
-  dataSource = this.tasks;
+  dataSource!: Task[];
 
   constructor(
     private _taskService: TaskService
   ) { }
 
   ngOnInit(): void {
-    //fetched all task
-      this._taskService.getTasks().subscribe((data) => {
-        this.tasks = data;
-      });
+    this.getAllTask();
+  }
+  
+  //fetch all task
+  getAllTask() {
+    this._taskService.getTasks().subscribe((data) => {
+      this.dataSource = data;
+    });
   }
 }
