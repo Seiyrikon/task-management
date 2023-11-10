@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TaskOutput } from 'src/app/interfaces/task';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -23,16 +23,21 @@ export class TaskTableComponent implements OnInit {
   dataSource!: TaskOutput[];
 
   constructor(
-    private _taskService: TaskService
+    private _taskService: TaskService,
+    private _cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
     this._taskService.getAllTasks().subscribe((data) => {
       this.dataSource = data;
+      this._cdr.detectChanges();
+      console.log('Table Data Updated:', this.dataSource);
     });
 
     this._taskService.getTaskAddedSubject().subscribe((newTask) => {
       this.dataSource.push(newTask);
+      this._cdr.detectChanges();
+      console.log('New Task Added:', newTask);
     })
   }
   
