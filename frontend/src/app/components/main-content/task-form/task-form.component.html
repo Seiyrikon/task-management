@@ -1,12 +1,12 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
+<form class="example-form" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width" >
     <mat-label>Add task</mat-label>
-    <input matInput placeholder="Ex. Clean room" />
+    <input matInput formControlName="task_name" placeholder="Ex. Clean room" />
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Task Description</mat-label>
-    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    <textarea matInput formControlName="task_description" placeholder="Ex. It makes me feel..."></textarea>
   </mat-form-field>
 
   <button mat-raised-button color="primary">Add</button>

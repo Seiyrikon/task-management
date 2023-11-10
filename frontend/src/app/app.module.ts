@@ -4,7 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { TopNavigationComponent } from './components/top-navigation/top-navigation.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
-import { FormsModule } from '@angular/forms';
+
+//forms
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //common
 import { HttpClientModule } from '@angular/common/http';
@@ -27,7 +29,7 @@ import { TaskFormComponent } from './components/main-content/task-form/task-form
     TopNavigationComponent,
     MainContentComponent,
     TaskTableComponent,
-    TaskFormComponent
+    TaskFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { TaskFormComponent } from './components/main-content/task-form/task-form
     MatIconModule,
     MatButtonModule,
     MatTableModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
