@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { Task } from 'src/app/interfaces/task';
+import { TaskOutput } from 'src/app/interfaces/task';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -20,20 +20,20 @@ export class TaskTableComponent implements OnInit {
   // columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   // expandedElement!: Task | null;
   displayedColumns: string[] = ['ID', 'Name', 'Description', 'Del'];
-  dataSource!: Task[];
+  dataSource!: TaskOutput[];
 
   constructor(
     private _taskService: TaskService
   ) { }
 
   ngOnInit(): void {
-    this.getAllTask();
-  }
-  
-  //fetch all task
-  getAllTask() {
-    this._taskService.getTasks().subscribe((data) => {
+    this._taskService.getAllTasks().subscribe((data) => {
       this.dataSource = data;
     });
+
+    this._taskService.getTaskAddedSubject().subscribe((newTask) => {
+      this.dataSource.push(newTask);
+    })
   }
+  
 }
