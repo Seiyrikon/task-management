@@ -11,6 +11,12 @@ const Task = sequelize.define('tbl_task_mst', {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    task_start: {
+      type: DataTypes.TIME,
+    },
+    task_end: {
+      type: DataTypes.TIME,
+    },
     task_description: {
       type: DataTypes.STRING,
     },

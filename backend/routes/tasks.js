@@ -26,6 +26,8 @@ router.post('/new-task', async (req, res) => {
         const newTask = await Task.create({
             task_name: req.body.task_name,
             task_description: req.body.task_description,
+            task_start: req.body.task_start,
+            task_end: req.body.task_end,
         });
         res.json(newTask);
     } catch (error) {

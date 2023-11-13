@@ -8,6 +8,8 @@ CREATE TABLE tbl_task_mst (
 	task_id INT(9) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     task_name VARCHAR(50) NOT NULL,
     task_description VARCHAR(255),
+    task_start TIME,
+    task_end TIME,
     del_flag INT(1) NOT NULL DEFAULT 0,
     reg_id VARCHAR(50) DEFAULT "1",
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

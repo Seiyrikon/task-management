@@ -17,6 +17,8 @@ export class TaskFormComponent {
     this.taskForm = this._formBuilder.group({
       task_name: ['', Validators.required],
       task_description: [''],
+      task_start: [''],
+      task_end: [''],
     });
   }
 

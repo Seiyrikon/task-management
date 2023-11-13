@@ -20,7 +20,7 @@ export class TaskTableComponent implements OnInit, OnDestroy {
   // columnsToDisplay = ['ID', 'Name', 'Description', 'Del'];
   // columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   // expandedElement!: Task | null;
-  displayedColumns: string[] = ['ID', 'Name', 'Description', 'Del'];
+  displayedColumns: string[] = ['ID', 'Name', 'Duration', 'Description', 'Del'];
   dataSource!: TaskOutput[];
   private _subscription!: Subscription;
 
@@ -40,7 +40,7 @@ export class TaskTableComponent implements OnInit, OnDestroy {
       this.dataSource.push(newTask);
       this._cdr.detectChanges();
       console.log('New Task Added:', newTask);
-    })
+    });
   }
 
   ngOnDestroy(): void {

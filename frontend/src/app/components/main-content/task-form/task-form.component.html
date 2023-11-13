@@ -9,5 +9,15 @@
     <textarea matInput formControlName="task_description" placeholder="Ex. It makes me feel..."></textarea>
   </mat-form-field>
 
+  <mat-form-field class="example-full-width">
+    <mat-label>Task Start</mat-label>
+    <input matInput type="time" formControlName="task_start">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Task End</mat-label>
+    <input matInput type="time" formControlName="task_end">
+  </mat-form-field>
+
   <button mat-raised-button color="primary">Add</button>
 </form>
