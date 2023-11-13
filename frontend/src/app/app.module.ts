@@ -24,6 +24,7 @@ import { TaskTableComponent } from './components/main-content/task-table/task-ta
 import { TaskFormComponent } from './components/main-content/task-form/task-form.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Observable, map, startWith } from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -8,13 +9,16 @@ import { TaskService } from 'src/app/services/task.service';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })
-export class TaskFormComponent {
+export class TaskFormComponent implements OnInit{
   taskForm: FormGroup;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   showSpinner: boolean = false;
   showForm: boolean = false;
   showAddButton: boolean = true;
+  myControl = new FormControl('');
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions!: Observable<string[]>;
 
   constructor(
     private _taskService: TaskService,
@@ -27,6 +31,19 @@ export class TaskFormComponent {
       task_start: [''],
       task_end: [''],
     });
+  }
+
+  ngOnInit(): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   onSubmit() {
