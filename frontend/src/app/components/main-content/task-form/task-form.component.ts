@@ -13,6 +13,8 @@ export class TaskFormComponent {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   showSpinner: boolean = false;
+  showForm: boolean = false;
+  showAddButton: boolean = true;
 
   constructor(
     private _taskService: TaskService,
@@ -54,5 +56,15 @@ export class TaskFormComponent {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     })
+  }
+
+  onShowForm() {
+    this.showForm = !this.showForm;
+    this.showAddButton = !this.showAddButton;
+  }
+
+  onHideForm() {
+    this.showForm = !this.showForm;
+    this.showAddButton = !this.showAddButton;
   }
 }

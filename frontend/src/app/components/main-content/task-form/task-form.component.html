@@ -1,4 +1,4 @@
-<form class="example-form" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+<form class="example-form" [formGroup]="taskForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
   <mat-form-field class="example-full-width" >
     <mat-label>Add task</mat-label>
     <input matInput formControlName="task_name" placeholder="Ex. Clean room" />
@@ -19,7 +19,11 @@
     <input matInput type="time" formControlName="task_end">
   </mat-form-field>
 
-  <button mat-raised-button color="primary">Add</button>
+  <button mat-raised-button color="primary">Submit</button>
+  <button mat-raised-button color="warning" (click)="onHideForm()">Close</button>
 </form>
+<br>
+<button mat-raised-button color="primary" (click)="onShowForm()" *ngIf="showAddButton" >Add</button>
+
 
 <mat-spinner *ngIf="showSpinner"></mat-spinner>
