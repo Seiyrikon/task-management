@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { Observable, map, startWith } from 'rxjs';
-import { TaskService } from 'src/app/services/task.service';
+import { Observable, Subscription, map, startWith } from 'rxjs';
+import { Priority } from 'src/app/interfaces/priority';
+import { PriorityService } from 'src/app/services/priority/priority.service';
+import { TaskService } from 'src/app/services/task/task.service';
 
 @Component({
   selector: 'task-form',
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })
-export class TaskFormComponent implements OnInit{
+export class TaskFormComponent implements OnInit, OnDestroy {
   taskForm: FormGroup;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -17,11 +19,14 @@ export class TaskFormComponent implements OnInit{
   showForm: boolean = false;
   showAddButton: boolean = true;
   myControl = new FormControl('');
-  options: string[] = ['One', 'Two', 'Three'];
+  priorities!: Priority[];
+  options!: string[];
   filteredOptions!: Observable<string[]>;
+  private _subscription!: Subscription;
 
   constructor(
     private _taskService: TaskService,
+    private _priorityService: PriorityService,
     private _formBuilder: FormBuilder,
     private _snackbar: MatSnackBar,
   ) {
@@ -30,10 +35,21 @@ export class TaskFormComponent implements OnInit{
       task_description: [''],
       task_start: [''],
       task_end: [''],
+      priority_name: [''],
     });
   }
 
   ngOnInit(): void {
+
+    this._subscription = this._priorityService.getAllPriority().subscribe(
+      (data) => {
+        this.priorities = data;
+        this.options = this.priorities.map((priority) => priority.priority_name);
+      },
+      (error) => {
+        console.error(error);
+      });
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
@@ -47,10 +63,17 @@ export class TaskFormComponent implements OnInit{
   }
 
   onSubmit() {
-    if (this.taskForm.valid) {
+    const priorityName = this.taskForm.get('priority_name')?.value;
+    const priorityId = this.getPriorityId(priorityName);
+
+    console.log('Form Task', this.taskForm.value);
+    console.log('Priority name', priorityName);
+    
+    if (this.taskForm.valid && priorityId !== undefined) {
       this.showSpinner = true;
       const newTaskData = this.taskForm.value;
-      this._taskService.addNewTask(newTaskData).subscribe(
+      
+      this._taskService.addNewTask(newTaskData, priorityId).subscribe(
         (response) => {
           console.log('Task added Successfully', response);
           this._taskService.notifyTaskAdded(response);
@@ -68,6 +91,11 @@ export class TaskFormComponent implements OnInit{
     }
   }
 
+  getPriorityId(priorityName: string): number | undefined {
+    const priority = this.priorities.find(p => p.priority_name === priorityName);
+    return priority ? priority.priority_id : undefined;
+  }
+
   openSnackBar() {
     this._snackbar.open('Hello', 'Close', {
       horizontalPosition: this.horizontalPosition,
@@ -83,5 +111,11 @@ export class TaskFormComponent implements OnInit{
   onHideForm() {
     this.showForm = !this.showForm;
     this.showAddButton = !this.showAddButton;
+  }
+
+  ngOnDestroy(): void {
+    if (this._subscription) {
+      this._subscription.unsubscribe();
+    }
   }
 }

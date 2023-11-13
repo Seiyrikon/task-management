@@ -1,8 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TaskOutput } from 'src/app/interfaces/task';
-import { TaskService } from 'src/app/services/task.service';
+import { Task } from 'src/app/interfaces/task';
+import { TaskService } from 'src/app/services/task/task.service';
 
 @Component({
   selector: 'task-table',
@@ -21,7 +21,7 @@ export class TaskTableComponent implements OnInit, OnDestroy {
   // columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   // expandedElement!: Task | null;
   displayedColumns: string[] = ['id', 'name', 'duration', 'description', 'action'];
-  dataSource!: TaskOutput[];
+  dataSource!: Task[];
   private _subscription!: Subscription;
 
   constructor(
