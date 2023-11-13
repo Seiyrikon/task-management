@@ -8,7 +8,7 @@ router.get('/all-task', async (req, res) => {
         const tasks = await Task.findAll({
             where: {
                 del_flag: 0
-            }
+            },
         });
         if(tasks.length !== 0) {
             res.json(tasks);
@@ -18,6 +18,24 @@ router.get('/all-task', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to fetch data' })
+    }
+});
+
+router.get('/task/:task_id', async (req, res) => {
+    const taskId = req.params.task_id;
+    try {
+        const task = await Task.findAll({
+            where: {
+                task_id: taskId
+            },
+        });
+        if(task === null) {
+            res.json(task);
+        } else {
+            res.json(task);
+        }
+    } catch (error) {
+        console.error(error);
     }
 });
 
