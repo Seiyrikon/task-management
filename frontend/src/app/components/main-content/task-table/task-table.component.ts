@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { TaskOutput } from 'src/app/interfaces/task';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -15,12 +16,13 @@ import { TaskService } from 'src/app/services/task.service';
     ])
   ]
 })
-export class TaskTableComponent implements OnInit {
+export class TaskTableComponent implements OnInit, OnDestroy {
   // columnsToDisplay = ['ID', 'Name', 'Description', 'Del'];
   // columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   // expandedElement!: Task | null;
   displayedColumns: string[] = ['ID', 'Name', 'Description', 'Del'];
   dataSource!: TaskOutput[];
+  private _subscription!: Subscription;
 
   constructor(
     private _taskService: TaskService,
@@ -28,7 +30,7 @@ export class TaskTableComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._taskService.getAllTasks().subscribe((data) => {
+    this._subscription = this._taskService.getAllTasks().subscribe((data) => {
       this.dataSource = data;
       this._cdr.detectChanges();
       console.log('Table Data Updated:', this.dataSource);
@@ -39,6 +41,12 @@ export class TaskTableComponent implements OnInit {
       this._cdr.detectChanges();
       console.log('New Task Added:', newTask);
     })
+  }
+
+  ngOnDestroy(): void {
+      if(this._subscription) {
+        this._subscription.unsubscribe();
+      }
   }
   
 }
