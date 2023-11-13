@@ -22,6 +22,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import { TaskTableComponent } from './components/main-content/task-table/task-table.component';
 import { TaskFormComponent } from './components/main-content/task-form/task-form.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { TaskFormComponent } from './components/main-content/task-form/task-form
     MatButtonModule,
     MatTableModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
