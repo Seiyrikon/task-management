@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const sequelize = require('./config/config');
 const taskRoutes = require('./routes/tasks');
+const priorityRoutes = require('./routes/priorities');
 
 const app = express();
 
@@ -21,6 +22,7 @@ sequelize.sync()
 
 //routes
 app.use('/api', taskRoutes);
+app.use('/api', priorityRoutes);
 
 
 const PORT = 8000;
