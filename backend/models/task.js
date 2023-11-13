@@ -20,6 +20,9 @@ const Task = sequelize.define('tbl_task_mst', {
     task_description: {
       type: DataTypes.STRING,
     },
+    priority_id: {
+      type: DataTypes.INTEGER,
+    },
     del_flag: {
         type: DataTypes.INTEGER,
     }

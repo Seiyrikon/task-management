@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Priority = require('../models/priority');
 
-router.get('/all-priorities', async (req, res) => {
+router.get('/all-priority', async (req, res) => {
     try {
         const priorities = await Priority.findAll({
             where: {

@@ -39,13 +39,16 @@ router.get('/task/:task_id', async (req, res) => {
     }
 });
 
-router.post('/new-task', async (req, res) => {
+router.post('/new-task/:priority_id', async (req, res) => {
+    const { task_name, task_description, task_start, task_end } = req.body;
+    const priorityId = req.params.priority_id;
     try {
         const newTask = await Task.create({
-            task_name: req.body.task_name,
-            task_description: req.body.task_description,
-            task_start: req.body.task_start,
-            task_end: req.body.task_end,
+            task_name,
+            task_description,
+            task_start,
+            task_end,
+            priority_id: priorityId,
         });
         res.json(newTask);
     } catch (error) {
