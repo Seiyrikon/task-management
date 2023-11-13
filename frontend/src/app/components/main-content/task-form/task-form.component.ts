@@ -12,6 +12,7 @@ export class TaskFormComponent {
   taskForm: FormGroup;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  showSpinner: boolean = false;
 
   constructor(
     private _taskService: TaskService,
@@ -28,6 +29,7 @@ export class TaskFormComponent {
 
   onSubmit() {
     if (this.taskForm.valid) {
+      this.showSpinner = true;
       const newTaskData = this.taskForm.value;
       this._taskService.addNewTask(newTaskData).subscribe(
         (response) => {
@@ -38,9 +40,12 @@ export class TaskFormComponent {
         (error) => {
           console.error('Error adding task', error);
         }
-      );
+      ).add(() => {
+        this.showSpinner = false;
+      });
     } else {
       console.error('Form is invalid. Please check the fields');
+      this.showSpinner = false;
     }
   }
 
