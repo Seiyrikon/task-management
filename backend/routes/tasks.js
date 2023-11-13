@@ -13,7 +13,7 @@ router.get('/all-task', async (req, res) => {
         if(tasks.length !== 0) {
             res.json(tasks);
         } else {
-            res.json({message: "No data yet"});
+            res.json(tasks);
         }
     } catch (error) {
         console.error(error);
