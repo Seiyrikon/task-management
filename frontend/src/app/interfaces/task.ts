@@ -1,17 +1,11 @@
 import { Time } from "@angular/common"
 
-export interface TaskOutput {
+export interface Task {
     task_id: number,
     task_name: string,
     task_start: Time,
     task_end: Time,
     task_description: string,
+    priority_id: number,
     del_flag: number
-}
-
-export interface TaskInput {
-    task_name: string,
-    task_start: Time,
-    task_end: Time,
-    task_description: string,
 }
