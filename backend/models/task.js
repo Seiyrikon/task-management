@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/config");
+const Priority = require('./priority');
 
 const Task = sequelize.define('tbl_task_mst', {
     task_id: { // Update the field name to match the table
@@ -30,6 +31,8 @@ const Task = sequelize.define('tbl_task_mst', {
     tableName: 'tbl_task_mst',
     timestamps: false,
   });
+
+  Task.belongsTo(Priority, { foreignKey: 'priority_id' });
   
 
 module.exports = Task;

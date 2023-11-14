@@ -20,7 +20,7 @@ export class TaskTableComponent implements OnInit, OnDestroy {
   // columnsToDisplay = ['ID', 'Name', 'Description', 'Del'];
   // columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   // expandedElement!: Task | null;
-  displayedColumns: string[] = ['id', 'name', 'duration', 'description', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'priority', 'duration', 'description', 'action'];
   dataSource!: Task[];
   private _subscription!: Subscription;
 

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Task = require('../models/task');
+const Priority = require('../models/priority');
 
 router.get('/all-task', async (req, res) => {
     try {
@@ -9,11 +10,25 @@ router.get('/all-task', async (req, res) => {
             where: {
                 del_flag: 0
             },
+            include: [Priority],
         });
-        if(tasks.length !== 0) {
-            res.json(tasks);
+
+        const flattenedTasks = tasks.map(task => ({
+            task_id: task.task_id,
+            task_name: task.task_name,
+            task_start: task.task_start,
+            task_end: task.task_end,
+            task_description: task.task_description,
+            priority_id: task.priority_id,
+            del_flag: task.del_flag,
+            priority_name: task.tbl_priority_mst.priority_name, // Include only the priority name
+          }));
+
+          
+        if(flattenedTasks.length !== 0) {
+            res.json(flattenedTasks);
         } else {
-            res.json(tasks);
+            res.json([]);
         }
     } catch (error) {
         console.error(error);
