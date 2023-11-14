@@ -43,6 +43,22 @@ export class TaskTableComponent implements OnInit, OnDestroy {
     });
   }
 
+  getPriorityColor(priorityName: string | undefined): string {
+    // Define your color logic based on priorityName or priorityId
+    // For example, you can use a switch statement or if conditions
+
+    switch (priorityName) {
+      case 'High':
+        return 'warn'; // Use the 'warn' color for High priority
+      case 'Normal':
+        return 'primary'; // Use the 'primary' color for Normal priority
+      case 'Low':
+        return 'accent'; // Use the 'accent' color for Low priority
+      default:
+        return 'basic'; // Default color for other priorities
+    }
+  }
+
   ngOnDestroy(): void {
       if(this._subscription) {
         this._subscription.unsubscribe();
