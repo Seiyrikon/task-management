@@ -19,6 +19,10 @@ export class TaskService {
     return this._http.get<Task[]>(this.baseUrl+'/all-task');
   }
 
+  getTaskById(taskId: number): Observable<Task> {
+    return this._http.get<Task>(`${this.baseUrl}/task/${taskId}`)
+  }
+
   addNewTask(newTask: Task, priorityId: number): Observable<Task> {
     newTask.priority_id = priorityId
     return this._http.post<Task>(`${this.baseUrl}/new-task/${priorityId}`, newTask);

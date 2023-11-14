@@ -39,11 +39,13 @@ router.get('/all-task', async (req, res) => {
 router.get('/task/:task_id', async (req, res) => {
     const taskId = req.params.task_id;
     try {
-        const task = await Task.findAll({
+        const task = await Task.findOne({
             where: {
                 task_id: taskId
             },
+            include: [Priority]
         });
+        
         if(task === null) {
             res.json(task);
         } else {
