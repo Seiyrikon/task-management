@@ -22,10 +22,10 @@ router.get('/all-task', async (req, res) => {
             priority_id: task.priority_id,
             del_flag: task.del_flag,
             priority_name: task.tbl_priority_mst.priority_name, // Include only the priority name
-          }));
+        }));
 
-          
-        if(flattenedTasks.length !== 0) {
+
+        if (flattenedTasks.length !== 0) {
             res.json(flattenedTasks);
         } else {
             res.json([]);
@@ -45,11 +45,23 @@ router.get('/task/:task_id', async (req, res) => {
             },
             include: [Priority]
         });
-        
-        if(task === null) {
+
+        if (task === null) {
             res.json(task);
         } else {
-            res.json(task);
+
+            const flattenedTasks = {
+                task_id: task.task_id,
+                task_name: task.task_name,
+                task_start: task.task_start,
+                task_end: task.task_end,
+                task_description: task.task_description,
+                priority_id: task.priority_id,
+                del_flag: task.del_flag,
+                priority_name: task.tbl_priority_mst.priority_name, // Include only the priority name
+            };
+
+            res.json(flattenedTasks);
         }
     } catch (error) {
         console.error(error);
@@ -87,13 +99,13 @@ router.put('/update-task/:task_id', async (req, res) => {
                 returning: true,
             }
         );
-        
+
         if (taskUpdated === 0) {
             return res.status(404).json({ error: 'Task not found' });
         }
-        
+
         res.json({ message: 'Task updated successfuly!' });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to update task' });
@@ -104,11 +116,11 @@ router.delete('/delete-task/:task_id', async (req, res) => {
     const taskId = req.params.task_id;
     try {
         const deletedTask = await Task.destroy({
-            where: {task_id: taskId},
+            where: { task_id: taskId },
             returning: true,
         });
 
-        if(deletedTask === 0) {
+        if (deletedTask === 0) {
             return res.status(404).json({ error: 'Task not found' });
         }
         res.json({ message: 'Task deleted successfully.' });
@@ -131,13 +143,13 @@ router.put('/archive-task/:task_id', async (req, res) => {
                 returning: true,
             }
         );
-        
+
         if (taskArchived[0] === 0) {
             return res.status(404).json({ error: 'Task not found' });
         }
-        
+
         res.json({ message: 'Task archived successfuly!' });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to archive task' });
@@ -157,13 +169,13 @@ router.put('/restore-task/:task_id', async (req, res) => {
                 returning: true,
             }
         );
-        
+
         if (taskRestore[0] === 0) {
             return res.status(404).json({ error: 'Task not found' });
         }
-        
+
         res.json({ message: 'Task restored successfuly!' });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to restore task' });
