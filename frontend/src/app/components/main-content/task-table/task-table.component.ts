@@ -41,6 +41,7 @@ export class TaskTableComponent implements OnInit, OnDestroy {
       this._cdr.detectChanges();
       console.log('New Task Added:', newTask);
     });
+
   }
 
   getPriorityColor(priorityName: string | undefined): string {

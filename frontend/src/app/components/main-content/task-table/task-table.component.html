@@ -47,7 +47,7 @@
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table> -->
-
+<button mat-raised-button color="primary" routerLink="/add-task" >Add</button>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
   <!-- Position Column -->
   <ng-container matColumnDef="id">

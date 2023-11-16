@@ -16,8 +16,6 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   showSpinner: boolean = false;
-  showForm: boolean = false;
-  showAddButton: boolean = true;
   myControl = new FormControl('');
   priorities!: Priority[];
   options!: string[];
@@ -40,26 +38,24 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this._subscription = this._priorityService.getAllPriority().subscribe(
       (data) => {
         this.priorities = data;
         this.options = this.priorities.map((priority) => priority.priority_name);
+        this.filteredOptions = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value || '')),
+        );
       },
       (error) => {
         console.error(error);
       });
-
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
-    );
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    // Check if options is defined before filtering
+    return this.options ? this.options.filter(option => option.toLowerCase().includes(filterValue)) : [];
   }
 
   onSubmit() {
@@ -101,16 +97,6 @@ export class TaskFormComponent implements OnInit, OnDestroy {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     })
-  }
-
-  onShowForm() {
-    this.showForm = !this.showForm;
-    this.showAddButton = !this.showAddButton;
-  }
-
-  onHideForm() {
-    this.showForm = !this.showForm;
-    this.showAddButton = !this.showAddButton;
   }
 
   ngOnDestroy(): void {
