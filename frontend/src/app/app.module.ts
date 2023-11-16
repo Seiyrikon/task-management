@@ -27,6 +27,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 import { AppRoutingModule } from './app-routing.module';
+import { EditTaskFormComponent } from './components/main-content/edit-task-form/edit-task-form.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
     MainContentComponent,
     TaskTableComponent,
     TaskFormComponent,
+    EditTaskFormComponent,
   ],
   imports: [
     BrowserModule,
