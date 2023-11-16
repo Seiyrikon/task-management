@@ -26,6 +26,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatProgressSpinnerModule,
     MatAutocompleteModule,
     MatChipsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
