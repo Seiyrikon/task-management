@@ -12,7 +12,11 @@ import { TaskService } from 'src/app/services/task/task.service';
   styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent implements OnInit, OnDestroy {
-  taskForm: FormGroup;
+  task_name!: FormControl;
+  task_description!: FormControl;
+  task_start!: FormControl;
+  task_end!: FormControl;
+  priority_name!: FormControl;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   showSpinner: boolean = false;
@@ -27,15 +31,16 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     private _priorityService: PriorityService,
     private _formBuilder: FormBuilder,
     private _snackbar: MatSnackBar,
-  ) {
-    this.taskForm = this._formBuilder.group({
-      task_name: ['', Validators.required],
-      task_description: [''],
-      task_start: [''],
-      task_end: [''],
-      priority_name: [''],
-    });
-  }
+  ) { }
+
+  
+  taskForm: FormGroup = new FormGroup({
+    task_name: new FormControl('', Validators.required),
+    task_description: new FormControl('', Validators.required),
+    task_start: new FormControl('', Validators.required),
+    task_end: new FormControl('', Validators.required),
+    priority_name: new FormControl('', Validators.required),
+  });
 
   ngOnInit(): void {
     this._subscription = this._priorityService.getAllPriority().subscribe(
