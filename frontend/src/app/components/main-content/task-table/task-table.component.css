@@ -46,3 +46,20 @@ table {
     opacity: 0.5;
   }
   
+  .high-priority {
+    background-color: #f44336; /* Red color for High priority */
+    color: white; /* Text color */
+  }
+  
+  .normal-priority {
+    background-color: #2196f3; /* Blue color for Normal priority */
+    color: white; /* Text color */
+  }
+  
+  .low-priority {
+    background-color: #ff9800; /* Orange color for Low priority */
+    color: white; /* Text color */
+  }
+  
+  /* Add any additional styling as needed */
+  

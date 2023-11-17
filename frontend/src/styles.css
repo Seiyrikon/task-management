@@ -4,3 +4,20 @@
 @import 'tailwindcss/utilities';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Update these colors according to your design */
+.mat-chip-high {
+    background-color: #f44336; /* Red color for High priority */
+    color: white; /* Text color */
+  }
+  
+  .mat-chip-normal {
+    background-color: #2196f3; /* Blue color for Normal priority */
+    color: white; /* Text color */
+  }
+  
+  .mat-chip-low {
+    background-color: #ff9800; /* Orange color for Low priority */
+    color: white; /* Text color */
+  }
+  
