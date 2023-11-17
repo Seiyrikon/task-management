@@ -21,4 +21,29 @@ router.get('/all-priority', async (req, res) => {
     }
 });
 
+router.get('/priority/:priority_id', async(req, res) => {
+    const priorityId = req.params.priority_id;
+    try {
+        const priority = await Priority.findOne({
+            where: {
+                priority_id: priorityId
+            },
+        });
+
+        if (priority === null) {
+            res.json(priority);
+        } else {
+
+            const flattenedPriority = {
+                priority_id: priority.priority_id,
+                priority_name: priority.priority_name
+            };
+
+            res.json(flattenedPriority);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+})
+
 module.exports = router;
