@@ -26,20 +26,12 @@ export class TaskTableComponent implements OnInit, OnDestroy {
 
   constructor(
     private _taskService: TaskService,
-    private _cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
     this._subscription = this._taskService.getAllTasks().subscribe((data) => {
       this.dataSource = data;
-      this._cdr.detectChanges();
       console.log('Table Data Updated:', this.dataSource);
-    });
-
-    this._taskService.getTaskAddedSubject().subscribe((newTask) => {
-      this.dataSource.push(newTask);
-      this._cdr.detectChanges();
-      console.log('New Task Added:', newTask);
     });
 
   }

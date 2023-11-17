@@ -47,11 +47,11 @@ export class EditTaskFormComponent implements OnInit, OnDestroy {
     priority_name: new FormControl('', Validators.required),
   })
 
+  taskId: any = this._route.snapshot.params['task_id'];
   ngOnInit(): void {
-    const taskId = this._route.snapshot.params['task_id'];
-    console.log(taskId);
+    console.log(this.taskId);
     
-    this._subscription = this._taskService.getTaskById(taskId).pipe(
+    this._subscription = this._taskService.getTaskById(this.taskId).pipe(
       switchMap((response) => {
         this.task = response;
         return this._priorityService.getPriorityById(this.task.priority_id);
@@ -98,12 +98,11 @@ export class EditTaskFormComponent implements OnInit, OnDestroy {
     
     if (this.editTaskForm.valid && priorityId !== undefined) {
       this.showSpinner = true;
-      const newTaskData = this.editTaskForm.value;
+      const modifiedTask = this.editTaskForm.value;
       
-      this._taskService.addNewTask(newTaskData, priorityId).subscribe(
+      this._taskService.editTask(modifiedTask, this.taskId, priorityId).subscribe(
         (response) => {
           console.log('Task added Successfully', response);
-          this._taskService.notifyTaskAdded(response);
           this.openSnackBar();
         },
         (error) => {

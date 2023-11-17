@@ -28,11 +28,7 @@ export class TaskService {
     return this._http.post<Task>(`${this.baseUrl}/new-task/${priorityId}`, newTask);
   }
 
-  getTaskAddedSubject(): Observable<Task> {
-    return this.taskAddedSubject.asObservable();
-  }
-
-  notifyTaskAdded(newTask: Task) {
-    this.taskAddedSubject.next(newTask);
+  editTask(modifiedTask: Task, taskId: number, priorityId:number): Observable<Task> {
+    return this._http.put<Task>(`${this.baseUrl}/update-task/${taskId}/${priorityId}`, modifiedTask);
   }
 }

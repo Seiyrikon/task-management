@@ -77,7 +77,6 @@ export class TaskFormComponent implements OnInit, OnDestroy {
       this._taskService.addNewTask(newTaskData, priorityId).subscribe(
         (response) => {
           console.log('Task added Successfully', response);
-          this._taskService.notifyTaskAdded(response);
           this.openSnackBar();
         },
         (error) => {

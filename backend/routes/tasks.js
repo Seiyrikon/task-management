@@ -86,13 +86,18 @@ router.post('/new-task/:priority_id', async (req, res) => {
     }
 });
 
-router.put('/update-task/:task_id', async (req, res) => {
+router.put('/update-task/:task_id/:priority_id', async (req, res) => {
+    const { task_name, task_description, task_start, task_end } = req.body;
     const taskId = req.params.task_id;
+    const priorityId = req.params.priority_id;
     try {
         const taskUpdated = await Task.update(
             {
-                task_name: req.body.task_name,
-                task_description: req.body.task_description,
+                task_name,
+                task_description,
+                task_start,
+                task_end,
+                priority_id: priorityId
             },
             {
                 where: { task_id: taskId },
