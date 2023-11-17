@@ -86,7 +86,7 @@
     <th mat-header-cell *matHeaderCellDef> Action </th>
     <td mat-cell *matCellDef="let task">
       <button mat-stroked-button [routerLink]="['/edit-task', task?.task_id]">Edit</button>
-      <button mat-stroked-button color="warn">Delete</button>
+      <button mat-stroked-button color="warn" (click)="archiveTask(task?.task_id)">Delete</button>
     </td>
   </ng-container>
 

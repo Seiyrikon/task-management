@@ -52,6 +52,15 @@ export class TaskTableComponent implements OnInit, OnDestroy {
     }
   }
 
+  archiveTask(taskId: number) {
+    const task = this._taskService.getTaskById(taskId);
+    this._subscription = this._taskService.archiveTask(task, taskId).subscribe(
+      (response) => {
+        console.log(response);
+      })
+    
+  }
+
   ngOnDestroy(): void {
       if(this._subscription) {
         this._subscription.unsubscribe();

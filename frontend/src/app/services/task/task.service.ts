@@ -31,4 +31,9 @@ export class TaskService {
   editTask(modifiedTask: Task, taskId: number, priorityId:number): Observable<Task> {
     return this._http.put<Task>(`${this.baseUrl}/update-task/${taskId}/${priorityId}`, modifiedTask);
   }
+
+  archiveTask(archivedTask:any, taskId: number): Observable<Task> {
+    return this._http.put<Task>(`${this.baseUrl}/archive-task/${taskId}`, archivedTask);
+  }
+
 }
