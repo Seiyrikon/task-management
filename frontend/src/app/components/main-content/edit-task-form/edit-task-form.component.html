@@ -1,1 +1,45 @@
-<p>edit-task-form works!</p>
+<form class="example-form" [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width" >
+      <mat-label>Add task</mat-label>
+      <input matInput formControlName="task_name" placeholder="Ex. Clean room" />
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <mat-label>Task Description</mat-label>
+      <textarea matInput formControlName="task_description" placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <mat-label>Task Start</mat-label>
+      <input matInput type="time" formControlName="task_start">
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <mat-label>Task End</mat-label>
+      <input matInput type="time" formControlName="task_end">
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <mat-label>Priority</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Priority"
+             matInput
+             formControlName="priority_name"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary">Submit</button>
+    <button mat-raised-button color="warning" routerLink="/tasks">Back</button>
+  </form>
+  <br>
+  
+  
+  
+  <mat-spinner *ngIf="showSpinner"></mat-spinner>
+  
