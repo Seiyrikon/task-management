@@ -14,7 +14,10 @@ export class PriorityService {
   ) { }
 
   getAllPriority(): Observable<Priority[]> {
-    return this._http.get<Priority[]>(`${this.baseUrl}/all-priority`)
+    return this._http.get<Priority[]>(`${this.baseUrl}/all-priority`);
   }
-  
+
+  getPriorityById(priorityId: number): Observable<Priority> {
+    return this._http.get<Priority>(`${this.baseUrl}/priority/${priorityId}`);
+  }
 }

@@ -20,7 +20,7 @@ export class TaskService {
   }
 
   getTaskById(taskId: number): Observable<Task> {
-    return this._http.get<Task>(`${this.baseUrl}/task/${taskId}`)
+    return this._http.get<Task>(`${this.baseUrl}/task/${taskId}`);
   }
 
   addNewTask(newTask: Task, priorityId: number): Observable<Task> {
