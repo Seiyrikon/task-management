@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription, map, startWith } from 'rxjs';
+import { Observable, Subscription, map, startWith, switchMap } from 'rxjs';
 import { Priority } from 'src/app/interfaces/priority';
 import { Task } from 'src/app/interfaces/task';
 import { PriorityService } from 'src/app/services/priority/priority.service';
@@ -51,21 +51,23 @@ export class EditTaskFormComponent implements OnInit, OnDestroy {
     const taskId = this._route.snapshot.params['task_id'];
     console.log(taskId);
     
-    this._subscription = this._taskService.getTaskById(taskId).subscribe(
-      (response) => {
+    this._subscription = this._taskService.getTaskById(taskId).pipe(
+      switchMap((response) => {
         this.task = response;
-        this.editTaskForm = this._formBuilder.group({
-          task_name: this.task.task_name,
-          task_description: this.task.task_description,
-          task_start: this.task.task_start,
-          task_end: this.task.task_end,
-          priority_name: this.task.priority_id
-        })
-        
-      },
-      (error) => {
-        console.error(error);
+        return this._priorityService.getPriorityById(this.task.priority_id);
       })
+    ).subscribe((priority) => {
+      this.editTaskForm = this._formBuilder.group({
+        task_name: this.task.task_name,
+        task_description: this.task.task_description,
+        task_start: this.task.task_start,
+        task_end: this.task.task_end,
+        priority_name: priority.priority_name // Assuming priority object has priority_name
+      });
+    }, 
+    (error) => {
+      console.error(error);
+    });
 
       this._subscription = this._priorityService.getAllPriority().subscribe(
         (data) => {
